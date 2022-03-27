@@ -7,11 +7,11 @@ import (
 	"github.com/asim/go-micro/v3"
 	log "github.com/asim/go-micro/v3/logger"
 	"github.com/asim/go-micro/v3/registry"
-	"github.com/huangshaoqi/cart/common"
 	"github.com/huangshaoqi/cart/domain/repository"
 	service2 "github.com/huangshaoqi/cart/domain/service"
 	"github.com/huangshaoqi/cart/handler"
 	cart "github.com/huangshaoqi/cart/proto/cart"
+	"github.com/huangshaoqi/common"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
 	"github.com/opentracing/opentracing-go"
@@ -50,7 +50,7 @@ func main() {
 	defer db.Close()
 	//禁止副表
 	db.SingularTable(true)
-	
+
 	repo := repository.NewCartRepository(db)
 	if !repo.HasTable() {
 		if err := repo.InitTable(); err != nil {
